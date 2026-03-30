@@ -57,14 +57,38 @@ void promptConfig(ProjectConfig& config) {
     prompt("Descrição", config.description);
 }
 
+void printHelp(const char* progName) {
+    std::cout << "Gerador de Estrutura de Projetos (dev-base-generators)" << std::endl;
+    std::cout << "\nUso:" << std::endl;
+    std::cout << "  " << progName << " <linguagem> [config.txt]" << std::endl;
+    std::cout << "  " << progName << " -h | --help" << std::endl;
+    std::cout << "\nLinguagens suportadas:" << std::endl;
+    std::cout << "  c       - Gera um projeto C base com Makefile" << std::endl;
+    std::cout << "  cpp     - Gera um projeto C++ base com Makefile" << std::endl;
+    std::cout << "  python  - Gera um projeto Python base com venv e requirements.txt" << std::endl;
+    std::cout << "  shell   - Gera um script Shell base com cabeçalho de licença" << std::endl;
+    std::cout << "\nArgumentos:" << std::endl;
+    std::cout << "  <linguagem>  A linguagem do projeto a ser gerado." << std::endl;
+    std::cout << "  [config.txt] Opcional: Caminho para um arquivo de configuração (.txt)" << std::endl;
+    std::cout << "               contendo os metadados do projeto (nome, autor, etc)." << std::endl;
+    std::cout << "\nExemplo:" << std::endl;
+    std::cout << "  " << progName << " cpp" << std::endl;
+    std::cout << "  " << progName << " python meu_projeto_config.txt" << std::endl;
+}
+
 int main(int argc, char* argv[]) {
     if (argc < 2) {
-        std::cerr << "Uso: " << argv[0] << " <linguagem> [config.txt]" << std::endl;
-        std::cerr << "Linguagens: c, cpp, python, shell" << std::endl;
+        printHelp(argv[0]);
         return 1;
     }
 
-    std::string langStr = argv[1];
+    std::string arg1 = argv[1];
+    if (arg1 == "-h" || arg1 == "--help") {
+        printHelp(argv[0]);
+        return 0;
+    }
+
+    std::string langStr = arg1;
     std::string configPath = (argc > 2) ? argv[2] : "";
 
     try {
