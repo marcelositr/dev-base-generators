@@ -46,7 +46,7 @@ int main() {
     tm_info = localtime(&t);
     strftime(data, MAX, "%d/%m/%Y às %H:%M", tm_info);
 
-    printf("=== Gerador de projeto C++ estilo Shell-Base ===\n");
+    printf("=== Gerador de projeto C++ ===\n");
     printf("Nome do projeto: "); fgets(nome_projeto, MAX, stdin); nome_projeto[strcspn(nome_projeto, "\n")] = 0;
     printf("Autor: "); fgets(autor, MAX, stdin); autor[strcspn(autor, "\n")] = 0;
     printf("Email: "); fgets(email, MAX, stdin); email[strcspn(email, "\n")] = 0;
