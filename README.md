@@ -1,46 +1,75 @@
-# Dev Base Generators
+# Dev Base Generators (Modern Edition)
 
-Coleção de generators em C para criar projetos iniciais em diferentes linguagens, com estrutura pronta estilo Shell-Base.
+Coleção de generators robusta e modular para criar projetos iniciais em diferentes linguagens. Refatorado com foco em POO, SOLID e Clean Code.
 
-## Generators disponíveis
+## Arquitetura
 
-- `c-gen.c` → Gera projetos em **C**
-- `cpp-gen.cpp` → Gera projetos em **C++**
-- `py-gen.c` → Gera projetos em **Python**
-- `sh-gen.c` → Gera projetos em **Shell Script (Bash)**
+O projeto utiliza uma arquitetura modular baseada em C++17:
 
-Cada generator cria a estrutura básica do projeto, incluindo:
+- **Core**: Contém a classe abstrata `Generator` com o padrão *Template Method* e as configurações base.
+- **Generators**: Implementações específicas para cada linguagem (C, C++, Python, Shell).
+- **Factory**: Padrão *Factory Method* para instanciar o gerador adequado via CLI.
+- **Utils**: Utilitários de sistema de arquivos e manipulação de strings.
+- **CLI**: Interface unificada para interação com o usuário.
 
-- Diretórios (`src`, `tests`, etc.)
-- Arquivos principais (`main`, `__init__.py` para Python, README.md, requirements.txt, etc.)
-- Cabeçalho com informações de autor, licença, versão e data
+## Generators Disponíveis
+
+- `c` → Gera projetos em **C**
+- `cpp` → Gera projetos em **C++**
+- `python` / `py` → Gera projetos em **Python**
+- `shell` / `sh` → Gera projetos em **Shell Script**
+
+## Como Usar
+
+### Compilação
+
+```bash
+make
+```
+
+### Execução Interativa
+
+```bash
+./dev-gen c
+```
+
+### Execução via Arquivo de Configuração
+
+Crie um arquivo `config.txt`:
+
+```text
+name: meu-projeto
+author: Seu Nome
+email: seu@email.com
+homepage: https://github.com/usuario/meu-projeto
+version: 1.0.0
+license: MIT
+description: Uma breve descrição do projeto.
+```
+
+E execute:
+
+```bash
+./dev-gen python config.txt
+```
 
 ---
 
-## Como usar
+## Estrutura do Repositório
 
-1. Compile o generator desejado:
-
-```bash
-gcc -o c-gen c-gen.c        # Para C
-g++ -o cpp-gen cpp-gen.cpp  # Para C++
-gcc -o py-gen py-gen.c      # Para Python
-gcc -o sh-gen sh-gen.c      # Para Shell Script
+```text
+.
+├── Makefile
+├── README.md
+├── src/
+│   ├── core/           # Abstrações e Modelos
+│   ├── generators/     # Implementações (C, C++, Py, Sh)
+│   ├── factory/        # Factory Pattern
+│   ├── utils/          # FileSystem Utils
+│   └── main.cpp        # Entry Point CLI
+└── tests/              # Testes (em desenvolvimento)
 ```
-
-2. Execute o generator:
-
-```bash
-./c-gen        # ou cpp-gen / py-gen / sh-gen
-```
-
-3. Preencha as informações solicitadas (nome do projeto, autor, email, versão, licença, etc.)
-
-O generator vai criar a **estrutura completa do projeto** no diretório atual.
-
----
 
 ## Licença
 
-Este projeto está licenciado sob a **MIT License**.  
-Veja o arquivo `LICENSE` para mais detalhes.
+Este projeto está licenciado sob a **MIT License**.
